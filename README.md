@@ -38,3 +38,33 @@ package.json에 아래 명령어들을 추가
     "prettier": "prettier --write ./src/**/*.{ts,tsx}"
   ...
 ```
+  
+# Husky 설정
+
+## Husky를 통한 Git Hook 설정
+- `yarn add -D husky`  
+   - 최초 진행시 `npx husky install`  
+
+- husky에 등록된 hook을 .git에 적용
+```json
+// package.json
+
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint --fix ./src/**/*.{ts,tsx,js,jsx}",
+    "prettier": "prettier --write ./src/**/*.{ts,tsx}",
+    "preview": "vite preview",
+  },
+}
+```  
+
+## `pre-commit`, `pre-push` hook 추가
+
+- `npx husky add .husky/pre-commit "yarn run prettier"`
+- `npx husky add .husky/pre-push "yarn run lint"`
+
+
+
